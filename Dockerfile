@@ -10,9 +10,9 @@
 ### Instructions ###
 # Install docker
 # Install nvidia-docker wrapper for docker
-# Run build... TODO
+# Run "docker build -t projectbase github.com/JYandev/NDIP_ProjectBase"
 # Run "xhost local:root" in order to share x11 socket with docker (used to run GUI apps).
-# Run "sudo nvidia-docker run -ti --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix <built image id or friendly name>"
+# Run "sudo nvidia-docker run -ti --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix projectbase"
 ### ###
 
 # Set the base image to Nvidia's Cuda+Cudnn Ubuntu
@@ -46,7 +46,7 @@ RUN apt-get install -y libtbb-dev libeigen3-dev
 
 ### Opencv 3.1 Installation ###
 RUN apt-get install -y unzip wget
-RUN wget https://github.com/opencv/opencv/archive/3.2.0.zip && unzip 3.2.0.zip && rm 3.2.0.zip && mv opencv-3.2.0 OpenCV && cd OpenCV && mkdir build && cd build && cmake .. && make -j4 && make install && ldconfig
+RUN wget https://github.com/opencv/opencv/archive/3.2.0.zip && unzip 3.2.0.zip && rm 3.2.0.zip && mv opencv-3.2.0 OpenCV && cd OpenCV && mkdir build && cd build && cmake .. && make -j8 && make install && ldconfig
 
 # Set work directory as the cuda samples folder
 WORKDIR /usr/local/cuda/samples
